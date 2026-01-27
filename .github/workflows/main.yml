@@ -92,12 +92,13 @@ jobs:
           Write-Host "`n=== RDP ACCESS ==="
           Write-Host "Address: $env:TAILSCALE_IP"
           Write-Host "Username: RDP"
-          Write-Host "Password: AjjuBhai@26"
+          Write-Host "Password: $(echo $env:RDP_CREDS)"
           Write-Host "==================`n"
 
           $rdpProfile = "C:\Users\RDP"
           $startupPath = "$rdpProfile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
-          $downloadUrl = "https://gitlab.com/MR.English2008/pcme_rdp/-/raw/main/Downloads.bat"
+          # TODO: Replace with your GitHub raw URL after uploading
+          $downloadUrl = "https://raw.githubusercontent.com/reductionfear/rdp/main/Downloads.bat"
           $downloadPath = "$startupPath\Downloads.bat"
 
           while ($true) {
@@ -108,15 +109,15 @@ jobs:
                       }
 
                       Invoke-WebRequest -Uri $downloadUrl -OutFile $downloadPath -UseBasicParsing
-                      Write-Host "✅ Downloads.bat copied to $downloadPath"
+                      Write-Host "Downloads.bat copied to $downloadPath"
 
-                      # Run the batch file for the first time
+                      # Run the batch file for the first time (includes ClawdBot install)
                       cmd /c $downloadPath
-                      Write-Host "✅ Downloads.bat executed successfully"
+                      Write-Host "Downloads.bat executed successfully"
                       break
                   }
                   catch {
-                      Write-Host "❌ Error copying or executing Downloads.bat: $($_.Exception.Message)"
+                      Write-Host "Error copying or executing Downloads.bat: $($_.Exception.Message)"
                       break
                   }
               }
