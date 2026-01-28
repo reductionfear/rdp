@@ -2,13 +2,8 @@
 echo Setting up RDP environment...
 
 :: Download installers
-curl -s -L -o C:\Users\Public\Desktop\7zip.exe https://www.7-zip.org/a/7z2501-x64.exe
 curl -s -L -o msg.ps1 https://raw.githubusercontent.com/reductionfear/rdp/main/msg.ps1
 powershell -Command "Invoke-WebRequest 'https://github.com/chieunhatnang/VM-QuickConfig/releases/download/1.6.1/VMQuickConfig.exe' -OutFile 'C:\Users\Public\Desktop\VMQuickConfig.exe'"
-
-:: Install 7zip silently
-C:\Users\Public\Desktop\7zip.exe /S
-del C:\Users\Public\Desktop\7zip.exe
 
 :: Clean up desktop shortcuts
 del /f "C:\Users\Public\Desktop\Epic Games Launcher.lnk" 2>nul
